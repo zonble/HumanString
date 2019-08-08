@@ -15,6 +15,14 @@ final class HumanStringTests: XCTestCase {
 		XCTAssertTrue(str[-3 ..< 0] == "好清爽")
 		XCTAssertTrue(str[-3 ..< 1] == nil)
 		XCTAssertTrue(str[-3 ... 1] == nil)
+		XCTAssertTrue(str[0...] == "今天天氣好清爽")
+		XCTAssertTrue(str[1...] == "天天氣好清爽")
+		XCTAssertTrue(str[(-2)...] == "清爽")
+		XCTAssertTrue(str[(-1)...] == "爽")
+		XCTAssertTrue(str[..<3] == "今天天")
+		XCTAssertTrue(str[...3] == "今天天氣")
+		XCTAssertTrue(str[..<(-1)] == "今天天氣好清")
+		XCTAssertTrue(str[...(-1)] == "今天天氣好清爽")
 	}
 
 	func testSubstring2() {
@@ -32,6 +40,20 @@ final class HumanStringTests: XCTestCase {
 		XCTAssertTrue(str[-3 ... 1] == nil)
 	}
 
+	func testAt() {
+		let str = "abcde"
+		let index1 = str.index(at: 1)
+		XCTAssertTrue(str[index1] == "b")
+		let index2 = str.index(at: -1)
+		XCTAssertTrue(str[index2] == "e")
+	}
+
+	func testOp() {
+		let str = "abcde"
+		let i = str.startIndex + (str, 4)
+		XCTAssertTrue(str[i] == "e")
+	}
+
 //    func testExample() {
 //        // This is an example of a functional test case.
 //        // Use XCTAssert and related functions to verify your tests produce the correct
@@ -44,3 +66,4 @@ final class HumanStringTests: XCTestCase {
         ("testSubstring2", testSubstring2),
 		]
 }
+

@@ -1,7 +1,14 @@
 import Foundation
 
-public enum HumanStringError : Error {
+public enum HumanStringError : Error, LocalizedError {
 	case invalidRange
+
+	public var errorDescription: String? {
+		switch self {
+		case .invalidRange:
+			return "The range is invalid."
+		}
+	}
 }
 
 extension String {
@@ -10,6 +17,18 @@ extension String {
 			return self.index(self.endIndex, offsetBy: i)
 		}
 		return self.index(self.startIndex, offsetBy: i)
+	}
+
+	func convert(_ r:PartialRangeFrom<Int>) -> PartialRangeFrom<String.Index> {
+		return convert(r.lowerBound)...
+	}
+
+	func convert(_ r:PartialRangeUpTo<Int>) -> PartialRangeUpTo<String.Index> {
+		return ..<convert(r.upperBound)
+	}
+
+	func convert(_ r:PartialRangeThrough<Int>) -> PartialRangeThrough<String.Index> {
+		return ...convert(r.upperBound)
 	}
 
 	func convert(_ r:ClosedRange<Int>) -> ClosedRange<String.Index>? {
@@ -40,10 +59,33 @@ extension String {
 }
 
 extension String {
+
+	/// Returns a character at the given index.
+	/// - Parameter i: The index.
 	public subscript(i: Int) -> Character {
 		return self[convert(i)]
 	}
 
+	/// Returns a character at the given range.
+	/// - Parameter r: The range.
+	public subscript(r: PartialRangeFrom<Int>) -> Substring? {
+		return self[convert(r)]
+	}
+
+	/// Returns a character at the given range.
+	/// - Parameter r: The range.
+	public subscript(r: PartialRangeUpTo<Int>) -> Substring? {
+		return self[convert(r)]
+	}
+
+	/// Returns a character at the given range.
+	/// - Parameter r: The range.
+	public subscript(r: PartialRangeThrough<Int>) -> Substring? {
+		return self[convert(r)]
+	}
+
+	/// Returns a character at the given range.
+	/// - Parameter r: The range.
 	public subscript(r: ClosedRange<Int>) -> Substring? {
 		guard let range = convert(r) else {
 			return nil
@@ -51,11 +93,21 @@ extension String {
 		return self[range]
 	}
 
+	/// Returns a character at the given range.
+	/// - Parameter r: The range.
 	public subscript(r: Range<Int>) -> Substring? {
 		guard let range = convert(r) else {
 			return nil
 		}
 		return self[range]
+	}
+}
+
+extension String {
+	/// Returns a `String.Index` object at the given index.
+	/// - Parameter i: the index.
+	public func index(at i: Int) -> String.Index {
+		return convert(i)
 	}
 }
 
@@ -76,3 +128,8 @@ extension String {
 	}
 }
 
+extension String.Index {
+	static func + (left: String.Index, right: (String, Int) ) -> String.Index {
+		return right.0.index(left, offsetBy: right.1)
+	}
+}
