@@ -53,17 +53,11 @@ final class HumanStringTests: XCTestCase {
 		let i = str.startIndex + (str, 4)
 		XCTAssertTrue(str[i] == "e")
 	}
-
-//    func testExample() {
-//        // This is an example of a functional test case.
-//        // Use XCTAssert and related functions to verify your tests produce the correct
-//        // results.
-//        XCTAssertEqual(HumanString().text, "Hello, World!")
-//    }
-
     static var allTests = [
         ("testSubstring1", testSubstring1),
         ("testSubstring2", testSubstring2),
+        ("testAt", testAt),
+        ("testOp", testOp),
 		]
 }
 
