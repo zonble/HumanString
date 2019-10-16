@@ -1,6 +1,8 @@
 import Foundation
 
+/// The errors that coould happen in HumanString library.
 public enum HumanStringError : Error, LocalizedError {
+	/// The range is invalid.
 	case invalidRange
 
 	public var errorDescription: String? {
@@ -104,6 +106,31 @@ extension String {
 }
 
 extension String {
+
+	public func substring(from index: Int) -> String? {
+		if let substring = self[index...] {
+			return String(substring)
+		}
+		return nil
+	}
+
+	public func substring(to index: Int) -> String? {
+		if let substring =  self[..<index] {
+			return String(substring)
+		}
+		return nil
+	}
+
+	public func substring(with aRange: Range<Int>) -> String? {
+		if let substring = self[aRange.startIndex..<aRange.endIndex] {
+			return String(substring)
+		}
+		return nil
+	}
+
+}
+
+extension String {
 	/// Returns a `String.Index` object at the given index.
 	/// - Parameter i: the index.
 	public func index(at i: Int) -> String.Index {
@@ -125,11 +152,5 @@ extension String {
 			return
 		}
 		self.removeSubrange(range)
-	}
-}
-
-extension String.Index {
-	static func + (left: String.Index, right: (String, Int) ) -> String.Index {
-		return right.0.index(left, offsetBy: right.1)
 	}
 }
