@@ -15,10 +15,7 @@ public enum HumanStringError : Error, LocalizedError {
 
 extension String {
 	func convert(_ i: Int) -> String.Index {
-		if i < 0 {
-			return self.index(self.endIndex, offsetBy: i)
-		}
-		return self.index(self.startIndex, offsetBy: i)
+		return i < 0 ? self.index(self.endIndex, offsetBy: i) : self.index(self.startIndex, offsetBy: i)
 	}
 
 	func convert(_ r:PartialRangeFrom<Int>) -> PartialRangeFrom<String.Index> {
@@ -60,35 +57,35 @@ extension String {
 	}
 }
 
-extension String {
+public extension String {
 
 	/// Returns a character at the given index.
 	/// - Parameter i: The index.
-	public subscript(i: Int) -> Character {
+	subscript(i: Int) -> Character {
 		return self[convert(i)]
 	}
 
 	/// Returns a character at the given range.
 	/// - Parameter r: The range.
-	public subscript(r: PartialRangeFrom<Int>) -> Substring? {
+	subscript(r: PartialRangeFrom<Int>) -> Substring? {
 		return self[convert(r)]
 	}
 
 	/// Returns a character at the given range.
 	/// - Parameter r: The range.
-	public subscript(r: PartialRangeUpTo<Int>) -> Substring? {
+	subscript(r: PartialRangeUpTo<Int>) -> Substring? {
 		return self[convert(r)]
 	}
 
 	/// Returns a character at the given range.
 	/// - Parameter r: The range.
-	public subscript(r: PartialRangeThrough<Int>) -> Substring? {
+	subscript(r: PartialRangeThrough<Int>) -> Substring? {
 		return self[convert(r)]
 	}
 
 	/// Returns a character at the given range.
 	/// - Parameter r: The range.
-	public subscript(r: ClosedRange<Int>) -> Substring? {
+	subscript(r: ClosedRange<Int>) -> Substring? {
 		guard let range = convert(r) else {
 			return nil
 		}
@@ -97,7 +94,7 @@ extension String {
 
 	/// Returns a character at the given range.
 	/// - Parameter r: The range.
-	public subscript(r: Range<Int>) -> Substring? {
+	subscript(r: Range<Int>) -> Substring? {
 		guard let range = convert(r) else {
 			return nil
 		}
@@ -105,23 +102,23 @@ extension String {
 	}
 }
 
-extension String {
+public extension String {
 
-	public func substring(from index: Int) -> String? {
+	func substring(from index: Int) -> String? {
 		if let substring = self[index...] {
 			return String(substring)
 		}
 		return nil
 	}
 
-	public func substring(to index: Int) -> String? {
+	func substring(to index: Int) -> String? {
 		if let substring =  self[..<index] {
 			return String(substring)
 		}
 		return nil
 	}
 
-	public func substring(with aRange: Range<Int>) -> String? {
+	func substring(with aRange: Range<Int>) -> String? {
 		if let substring = self[aRange.startIndex..<aRange.endIndex] {
 			return String(substring)
 		}
@@ -130,24 +127,24 @@ extension String {
 
 }
 
-extension String {
+public extension String {
 	/// Returns a `String.Index` object at the given index.
 	/// - Parameter i: the index.
-	public func index(at i: Int) -> String.Index {
+	func index(at i: Int) -> String.Index {
 		return convert(i)
 	}
 }
 
-extension String {
-	public mutating func insert(_ newElement: __owned Character, at i: Int) {
+public extension String {
+	mutating func insert(_ newElement: __owned Character, at i: Int) {
 		self.insert(newElement, at: convert(i))
 	}
 
-	public mutating func remove(at position: Int) -> Character {
+	mutating func remove(at position: Int) -> Character {
 		return self.remove(at: convert(position))
 	}
 
-	public mutating func removeSubrange(_ bounds: Range<Int>) {
+	mutating func removeSubrange(_ bounds: Range<Int>) {
 		guard let range = convert(bounds) else {
 			return
 		}
