@@ -36,6 +36,18 @@ public class Match {
 		self.string = string
 	}
 
+	/// The position of the matching range.
+	public var position: Int {
+		return checkResult.range.location
+	}
+
+	/// The end position of the matching range,
+	public var endPosition: Int {
+		return checkResult.range.location + checkResult.range.length
+	}
+
+	/// The match groups.
+	/// - Returns: An array of string.
 	public func groups() -> [String] {
 		let ranges = self.checkResult.numberOfRanges
 		return (0..<ranges).map { index in
@@ -44,6 +56,9 @@ public class Match {
 		}
 	}
 
+	/// Returns the string at the given index.
+	/// - Parameter index: The index.
+	/// - Returns: The string.
 	public func group(at index: Int) -> String? {
 		if index >= self.checkResult.numberOfRanges {
 			return nil
