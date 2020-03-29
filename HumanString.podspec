@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'HumanString'
-  s.version = '0.0.2'
+  s.version = '0.1.0'
   s.summary = 'Makes substrings in Swift for human again.'
   s.description = <<-DESC
 Sometimes you just want an easier way to work on substrings, so I made this.

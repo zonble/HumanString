@@ -38,6 +38,8 @@ dependencies: [
 ],
 ```
 
+You can also install the library using CocoaPods, just add `pod "HumanString"`
+to you Podfile.
 
 ## Notes
 
@@ -60,4 +62,3 @@ let subString = s[str.index(str.startIndex, offsetBy: 0)...str.index(str.startIn
 
 I know the Swift team does not like what I am doing here, but somehow I still
 want to make my life easier.
-
