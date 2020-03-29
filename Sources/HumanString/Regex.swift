@@ -22,6 +22,26 @@ public class Regex {
 			return Match($0, string)
 		}
 	}
+
+	/// Find the first match in a string with a given pattern.
+	/// - Parameters:
+	///   - pattern: The pattern.
+	///   - string: The string.
+	///   - options: The options to build the `NSRegularExpression` object.
+	///   - matchingOptions: The options for matching.
+	/// - Throws: The errors that could happen during creating the `NSRegularExpression` object.
+	/// - Returns: The girst match.
+	func findFirst(pattern: String,
+				   string: String,
+				   options: NSRegularExpression.Options = [],
+				   matchingOptions: NSRegularExpression.MatchingOptions = []
+				   ) throws -> Match? {
+		let regex = try NSRegularExpression(pattern: pattern, options: options)
+		guard let result = regex.firstMatch(in: string, options: matchingOptions, range: NSMakeRange(0, string.count)) else {
+			return nil
+		}
+		return Match(result, string)
+	}
 }
 
 /// Represents the matches.
