@@ -10,7 +10,7 @@ Sometimes you just want an easier way to work on substrings, so I made this.
   s.license = {:type => 'MIT', :file => 'LICENSE'}
   s.author = {'zonble' => 'zonble@gmail.com'}
   s.source = {:git => 'https://github.com/zonble/HumanString.git', :tag => s.version.to_s}
-  s.swift_versions = ['4.2', '5.0', '5.1']
+  s.swift_versions = ['4.2', '5.0', '5.1', '5.2']
   s.source_files = 'Sources/HumanString/**/*'
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.10'

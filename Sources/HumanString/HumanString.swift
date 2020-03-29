@@ -136,18 +136,28 @@ public extension String {
 }
 
 public extension String {
-	mutating func insert(_ newElement: __owned Character, at i: Int) {
-		self.insert(newElement, at: convert(i))
+
+	/// Inserts a character at a given position.
+	/// - Parameters:
+	///   - newElement: The new character.
+	///   - position: The given index.
+	mutating func insert(_ newElement: __owned Character, at position: Int) {
+		insert(newElement, at: convert(position))
 	}
 
+	/// Removes a character at a given position.
+	/// - Parameter position: The given position
+	/// - Returns: The removes character.
 	mutating func remove(at position: Int) -> Character {
-		return self.remove(at: convert(position))
+		return remove(at: convert(position))
 	}
 
+	/// Removes characters in a given range.
+	/// - Parameter bounds: The given range.
 	mutating func removeSubrange(_ bounds: Range<Int>) {
 		guard let range = convert(bounds) else {
 			return
 		}
-		self.removeSubrange(range)
+		removeSubrange(range)
 	}
 }

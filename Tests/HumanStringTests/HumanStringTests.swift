@@ -53,7 +53,8 @@ final class HumanStringTests: XCTestCase {
 		let i = str.startIndex + (str, 4)
 		XCTAssertTrue(str[i] == "e")
 	}
-    static var allTests = [
+
+	static var allTests = [
         ("testSubstring1", testSubstring1),
         ("testSubstring2", testSubstring2),
         ("testAt", testAt),
