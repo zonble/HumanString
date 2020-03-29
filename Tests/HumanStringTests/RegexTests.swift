@@ -18,5 +18,8 @@ final class RegexTests: XCTestCase {
 		}
 	}
 
+	static var allTests = [
+        ("testRegex", testRegex),
+		]
 }
 

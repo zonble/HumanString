@@ -54,11 +54,26 @@ final class HumanStringTests: XCTestCase {
 		XCTAssertTrue(str[i] == "e")
 	}
 
+	func testInsert() {
+		var str = "abcde"
+		str.insert("a", at: 0)
+		XCTAssert(str == "aabcde")
+	}
+
+	func testRemove() {
+		var str = "abcde"
+		let a = str.remove(at: 0)
+		XCTAssert(str == "bcde")
+		XCTAssert(a == "a")
+	}
+
 	static var allTests = [
         ("testSubstring1", testSubstring1),
         ("testSubstring2", testSubstring2),
         ("testAt", testAt),
         ("testOp", testOp),
-		]
+        ("testInsert", testInsert),
+        ("testRemove", testRemove),
+	]
 }
 
