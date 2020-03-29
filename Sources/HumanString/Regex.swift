@@ -4,6 +4,7 @@ import Foundation
 public class Regex {
 
 	/// Find all matches in a string with a given pattern.
+	/// 
 	/// - Parameters:
 	///   - pattern: The pattern.
 	///   - string: The string.
@@ -24,13 +25,14 @@ public class Regex {
 	}
 
 	/// Find the first match in a string with a given pattern.
+	///
 	/// - Parameters:
 	///   - pattern: The pattern.
 	///   - string: The string.
 	///   - options: The options to build the `NSRegularExpression` object.
 	///   - matchingOptions: The options for matching.
 	/// - Throws: The errors that could happen during creating the `NSRegularExpression` object.
-	/// - Returns: The girst match.
+	/// - Returns: The first match.
 	func findFirst(pattern: String,
 				   string: String,
 				   options: NSRegularExpression.Options = [],
@@ -41,6 +43,26 @@ public class Regex {
 			return nil
 		}
 		return Match(result, string)
+	}
+
+	/// Makes a new string by replacing the matches with a template.
+	///
+	/// - Parameters:
+	///   - pattern: The pattern.
+	///   - string: The string.
+	///   - template: The template.
+	///   - options: The options to build the `NSRegularExpression` object.
+	///   - matchingOptions: The options for matching.
+	/// - Throws: The errors that could happen during creating the `NSRegularExpression` object.
+	/// - Returns: The replaced string.
+	func replace(pattern: String,
+		string: String,
+		template: String,
+		options: NSRegularExpression.Options = [],
+		matchingOptions: NSRegularExpression.MatchingOptions = []
+		)  throws -> String {
+		let regex = try NSRegularExpression(pattern: pattern, options: options)
+		return regex.stringByReplacingMatches(in: string, options: matchingOptions, range: NSMakeRange(0, string.count), withTemplate: template)
 	}
 }
 
