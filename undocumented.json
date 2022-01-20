@@ -1,0 +1,26 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/HumanString/HumanString/Sources/HumanString/HumanString.swift",
+      "line": 107,
+      "symbol": "String.substring(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/HumanString/HumanString/Sources/HumanString/HumanString.swift",
+      "line": 114,
+      "symbol": "String.substring(to:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/HumanString/HumanString/Sources/HumanString/HumanString.swift",
+      "line": 121,
+      "symbol": "String.substring(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/HumanString/HumanString"
+}

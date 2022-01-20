@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HumanString  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a title="HumanString  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">HumanString 0.1.0 Docs</a> (91% documented)</p>
+        <div class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </div>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">HumanString Reference</a>
+        <img id="carat" src="img/carat.png" alt=""/>
+        HumanString  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Match.html">Match</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/Regex.html">Regex</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/HumanStringError.html">HumanStringError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/String/Index.html">– Index</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='humanstring' class='heading'>HumanString</h1>
+
+<p><a href="https://github.com/zonble/HumanString/actions"><img src="https://github.com/zonble/HumanString/workflows/Build/badge.svg" alt="Actions Status"></a></p>
+
+<p>HumanString is a package that let you use integers but not String.Index to
+specify ranges in strings.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"今天天氣好清爽"</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"今"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s">"好"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">"爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="o">..&lt;</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">"今天"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s">"今天天"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">..&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">"好清"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">...</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">"好清爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">...</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">..&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">"好清爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">..&lt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span> <span class="o">...</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="o">...</span><span class="p">]</span> <span class="o">==</span> <span class="s">"今天天氣好清爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="o">...</span><span class="p">]</span> <span class="o">==</span> <span class="s">"天天氣好清爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">...</span><span class="p">]</span> <span class="o">==</span> <span class="s">"清爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">...</span><span class="p">]</span> <span class="o">==</span> <span class="s">"爽"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">..&lt;</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s">"今天天"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">...</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s">"今天天氣"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">..&lt;</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">==</span> <span class="s">"今天天氣好清"</span><span class="p">)</span>
+<span class="kt">XCTAssertTrue</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="o">...</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span> <span class="o">==</span> <span class="s">"今天天氣好清爽"</span><span class="p">)</span>
+</code></pre>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>You can install the package using Swift package manager. Add the following lines to your <code>Packages.swift</code> file:</p>
+<pre class="highlight plaintext"><code>dependencies: [
+    .package(url: "https://github.com/zonble/HumanString.git"),
+],
+</code></pre>
+
+<p>You can also install the library using CocoaPods, just add <code>pod &quot;HumanString&quot;</code>
+to you Podfile.</p>
+<h2 id='notes' class='heading'>Notes</h2>
+
+<p>Swift adopts String.Index since Swift 4. It tends to reminder you that the width
+of a string is not fixed (See<a href="https://oleb.net/blog/2017/11/swift-4-strings/">Strings in Swift 4</a>).
+However, it is somehow painful. For example, if you want to extract a prefix
+from &ldquo;Hello World&rdquo;, it could be:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="s">"Hello World"</span>
+<span class="k">let</span> <span class="nv">subString</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="o">...</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">5</span><span class="p">)]</span>
+</code></pre>
+
+<p>But wait, somehow you are still using integers, right? The code above could be
+written as:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">subString</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span><span class="o">...</span><span class="n">str</span><span class="o">.</span><span class="nf">index</span><span class="p">(</span><span class="n">str</span><span class="o">.</span><span class="n">startIndex</span><span class="p">,</span> <span class="nv">offsetBy</span><span class="p">:</span> <span class="mi">5</span><span class="p">)]</span>
+</code></pre>
+
+<p>I know the Swift team does not like what I am doing here, but somehow I still
+want to make my life easier.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2022 <a class="link" href="https://xddd.kkbox.io/kkpartnerplayer/" target="_blank" rel="external noopener">zonble</a>. All rights reserved. (Last updated: 2022-01-20)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.1</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
