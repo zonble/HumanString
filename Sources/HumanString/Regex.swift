@@ -1,7 +1,7 @@
 import Foundation
 
 /// A helper that makes using Regular Expression easier.
-public class Regex {
+public struct Regex {
 
     /// Find all matches in a string with a given pattern.
     /// 
@@ -67,7 +67,7 @@ public class Regex {
 }
 
 /// Represents the matches.
-public class Match {
+public struct Match {
     /// The string.
     public private (set) var string: String
     /// The `NSTextCheckingResult` object.
