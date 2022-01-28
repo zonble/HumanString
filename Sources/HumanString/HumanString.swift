@@ -1,6 +1,6 @@
 import Foundation
 
-/// The errors that coould happen in HumanString library.
+/// The errors that could happen in HumanString library.
 public enum HumanStringError: Error, LocalizedError {
     /// The range is invalid.
     case invalidRange
