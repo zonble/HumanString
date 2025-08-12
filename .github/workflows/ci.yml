@@ -22,4 +22,6 @@ jobs:
         uses: maxep/spm-lcov-action@0.3.0
         with:
           output-file: ./coverage/lcov.info
+        env:
+          PATH: "/usr/share/swift/usr/bin:${{ env.PATH }}"
       
