@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build
-        run: swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios12.1-simulator"
+        run: swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios13.0-simulator"
         working-directory: ./
   test:
     name: Test and Coverage
@@ -31,6 +31,8 @@ jobs:
         uses: maxep/spm-lcov-action@0.3.1
         with:
           output-file: ./coverage/lcov.info
+        env:
+          PATH: "/usr/share/swift/usr/bin:${{ env.PATH }}"
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
@@ -43,4 +45,3 @@ jobs:
           name: coverage-report
           path: ./coverage/
           retention-days: 30
-      

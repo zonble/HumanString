@@ -69,9 +69,9 @@ public struct Regex {
 /// Represents the matches.
 public struct Match {
     /// The string.
-    public private (set) var string: String
+    public private(set) var string: String
     /// The `NSTextCheckingResult` object.
-    public private (set) var checkResult: NSTextCheckingResult
+    public private(set) var checkResult: NSTextCheckingResult
 
     fileprivate init(_ checkResult: NSTextCheckingResult, _ string: String) {
         self.checkResult = checkResult
