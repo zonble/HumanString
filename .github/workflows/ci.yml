@@ -20,6 +20,10 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install LLVM tools
+        run: |
+          brew install llvm
+          echo "$(brew --prefix llvm)/bin" >> $GITHUB_PATH
       - name: Run Tests with Coverage
         run: swift test --enable-code-coverage
         working-directory: ./
