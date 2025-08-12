@@ -7,7 +7,7 @@ on:
     types: [published]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -16,16 +16,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy_docs:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build_and_deploy_docs:
     runs-on: macos-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
+      with:
+        fetch-depth: 0
+    
     - name: Build DocC Documentation
       run: |
         swift package --allow-writing-to-directory docs \
@@ -34,10 +32,11 @@ jobs:
           --transform-for-static-hosting \
           --hosting-base-path HumanString \
           --output-path docs
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: 'docs'
+    
     - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        publish_branch: gh-pages
+        force_orphan: true
