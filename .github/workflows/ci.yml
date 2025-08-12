@@ -6,7 +6,11 @@ jobs:
     name: Build
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
       - name: Build
         run: swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios12.1-simulator"
         working-directory: ./
@@ -14,12 +18,8 @@ jobs:
     name: Test
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Build
-        run: swift test --enable-code-coverage
+      - uses: actions/checkout@v4
+      - name: Build and Test
+        run: swift test
         working-directory: ./
-      - name: Test coverage
-        uses: maxep/spm-lcov-action@0.3.0
-        with:
-          output-file: ./coverage/lcov.info
       
