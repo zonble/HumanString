@@ -1,0 +1,53 @@
+# SwiftLint configuration file for HumanString
+
+# Include all Swift files in the project
+included:
+  - Sources
+  - Tests
+
+# Exclude build artifacts and dependencies
+excluded:
+  - .build
+  - Packages
+  - Package.resolved
+  - "**/*.docc"
+
+# Opt-in rules (disabled by default but good to enable)
+opt_in_rules:
+  - empty_count
+  - explicit_type_interface
+  - file_name
+  - first_where
+  - sorted_first_last
+  - vertical_parameter_alignment_on_call
+
+# Disabled rules
+disabled_rules:
+  - line_length # Allow longer lines for documentation
+  - file_length # Allow longer files for comprehensive functionality
+  - function_body_length # Allow longer functions for complex logic
+
+# Rule configurations
+type_body_length:
+  warning: 400
+  error: 500
+
+function_parameter_count:
+  warning: 6
+  error: 8
+
+# Naming rules
+identifier_name:
+  min_length: 1 # Allow single-character variable names (common in string operations)
+  max_length: 40
+
+# Force unwrapping
+force_unwrapping: error
+
+# Force try
+force_try: error
+
+# Whitespace and formatting
+trailing_whitespace:
+  ignores_empty_lines: true
+  ignores_comments: false
