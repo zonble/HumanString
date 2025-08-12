@@ -1,6 +1,7 @@
 # HumanString
 
 [![Actions Status](https://github.com/zonble/HumanString/workflows/Build/badge.svg)](https://github.com/zonble/HumanString/actions)
+[![codecov](https://codecov.io/gh/zonble/HumanString/branch/master/graph/badge.svg)](https://codecov.io/gh/zonble/HumanString)
 
 HumanString is a package that let you use integers but not String.Index to
 specify ranges in strings.
