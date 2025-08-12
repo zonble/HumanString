@@ -6,3 +6,8 @@
 .swiftpm
 .idea
 buildConfigurations
+
+# Coverage reports
+coverage/
+*.lcov
+*.coverage
