@@ -4,12 +4,38 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   deploy_docs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Publish Jazzy Docs
-      uses: steven0351/publish-jazzy-docs@v1
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+    - name: Build DocC Documentation
+      run: |
+        swift package --allow-writing-to-directory docs \
+          generate-documentation --target HumanString \
+          --disable-indexing \
+          --transform-for-static-hosting \
+          --hosting-base-path HumanString \
+          --output-path docs
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        personal_access_token: ${{ secrets.ACCESS_TOKEN }}
+        path: 'docs'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
