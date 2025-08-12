@@ -1,5 +1,10 @@
 name: Build
-on: [push]
+on: [push, pull_request]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
 
 jobs:
   build:
@@ -15,11 +20,30 @@ jobs:
         run: swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios12.1-simulator"
         working-directory: ./
   test:
-    name: Test
+    name: Test and Coverage
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build and Test
-        run: swift test
+      - name: Install LLVM tools
+        run: |
+          brew install llvm
+          echo "$(brew --prefix llvm)/bin" >> $GITHUB_PATH
+      - name: Run Tests with Coverage
+        run: swift test --enable-code-coverage
         working-directory: ./
-      
+      - name: Generate Coverage Report
+        uses: maxep/spm-lcov-action@0.3.1
+        with:
+          output-file: ./coverage/lcov.info
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
+          fail_ci_if_error: false
+          verbose: true
+      - name: Upload Coverage Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./coverage/
+          retention-days: 30
