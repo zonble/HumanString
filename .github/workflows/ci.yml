@@ -43,9 +43,9 @@ jobs:
         env:
           PATH: "/usr/share/swift/usr/bin:${{ env.PATH }}"
       - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
-          file: ./coverage/lcov.info
+          files: ./coverage/lcov.info
           fail_ci_if_error: false
           verbose: true
       - name: Upload Coverage Artifacts
