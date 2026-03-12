@@ -35,20 +35,19 @@ jobs:
     
     - name: Create index.html redirect
       run: |
-        cat > docs/index.html <<'EOF'
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>HumanString Documentation</title>
-    <meta http-equiv="refresh" content="0; url=documentation/humanstring/">
-    <link rel="canonical" href="documentation/humanstring/">
-  </head>
-  <body>
-    <p>Redirecting to <a href="documentation/humanstring/">documentation</a>…</p>
-  </body>
-</html>
-EOF
+        printf '%s\n' \
+          '<!DOCTYPE html>' \
+          '<html>' \
+          '  <head>' \
+          '    <meta charset="utf-8">' \
+          '    <title>HumanString Documentation</title>' \
+          '    <meta http-equiv="refresh" content="0; url=documentation/humanstring/">' \
+          '    <link rel="canonical" href="documentation/humanstring/">' \
+          '  </head>' \
+          '  <body>' \
+          '    <p>Redirecting to <a href="documentation/humanstring/">documentation</a>…</p>' \
+          '  </body>' \
+          '</html>' > docs/index.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
